@@ -170,7 +170,6 @@ x,y のマージンをそれぞれ 0.4 cmに設定。マージンは、ラベル
 ```c++
 tpp.figure.margin=cptp::Vec2(0.4, 0.4);
 ```
-
 ``tpp.figure.margin.x`` などを変更することで、$x$ 軸のマージンのみ変更なども可能です。
 
 ## label
@@ -179,12 +178,10 @@ tpp.figure.margin=cptp::Vec2(0.4, 0.4);
 
 ラベルを表示するかどうかのフラグです。true で有効、false で無効です。
 
-```c++
+
 表示するかどうかのフラグです。true で有効、false で無効です。
 
-￼
-tpp.label.enable=true;
-[x or y].string（型：std::string）
+```c++
 tpp.label.enable=true;
 ```
 
