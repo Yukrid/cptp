@@ -33,7 +33,7 @@ tpp.figure.size.construct(cptp::Figure::PLOT_AREA, cptp::Vec2(8., 12.0));
 
 ### margin（型：``cptp::Vec2``）
 
-$x,y$ のマージンをそれぞれ 0.4 cmに設定。マージンは、ラベルまたはプロット領域の右上の角から図の末端までの距離を表します。
+< img src="https://render.githubusercontent.com/render/math?math= x,y" > のマージンをそれぞれ 0.4 cmに設定。マージンは、ラベルまたはプロット領域の右上の角から図の末端までの距離を表します。
 
 ```c++
 tpp.figure.margin=cptp::Vec2(0.4, 0.4);
