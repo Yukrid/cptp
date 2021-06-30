@@ -346,7 +346,7 @@ tpp.range.x.max=0.;
 
 プロットに関する設定の為の値です。``TabParPlots``型 は NxM のテーブルがあり、それぞれ各セルに P 個（以下）のプロットがある時に、各プロットに対応する P 個の ``PlotSpec``型の値を持ちます。アクセスは ``plot_spec``関数で行うか、``setPlotSpec``関数で``PlotSpec``型の値を直接代入できます。
 
-### tag（型：std::string）
+### tag（型：``std::string``）
 
 凡例に表示するプロット名です。デフォルト（空文字列）の場合は 0 から順に数字が入ります。
 
@@ -354,7 +354,7 @@ tpp.range.x.max=0.;
 tpp.plot_spec(p).tag="";
 ```
 
-### color（型：cptp::Color）
+### color（型：``cptp::Color``）
 
 プロットの色です。自動、IDから指定、RGBから指定の三種類の設定方法があります。デフォルトは自動です。変更は ``construct`` 関数を用います。線（``line``）や点（``point``）の方で自動以外に色が設定されている場合はそちらが優先されます。
 
@@ -386,11 +386,11 @@ tpp.plot_spec(p).color.construct(cptp::RGB(255, 0, 0));
 
 （RGBテストした覚えがないのが、これちゃんと動くんかな....）
 
-### line（型：cptp::Line）
+### line（型：``cptp::Line``）
 
 プロットの線の設定です。さらに細かい設定があります。
 
-#### enable（型：bool）
+#### enable（型：``bool``）
 
 プロットに線を利用するかどうかのフラグです。``true``で有効、``false`` で無効で、デフォルトは ``true`` です。点だけを打ちたい場合は線を ``false`` にして、点を ``true`` にします。
 
@@ -398,11 +398,11 @@ tpp.plot_spec(p).color.construct(cptp::RGB(255, 0, 0));
 tpp.plot_spec(p).line.enable=true;
 ```
 
-#### color（型：cptp::Color）
+#### color（型：``cptp::Color``）
 
 ``plot_spec`` の``color`` と同様なので割愛。
 
-#### width（型：cptp::Width）
+#### width（型：``cptp::Width``）
 
 プロットの線の太さの設定値です。tikzの線の太さの設定に準拠します。``cptp::Line::Width``型の列挙体で表現され、``SEMI_THICK, ULTRA_THIN, VERY_THIN, THIN, THICK, VERY_THICK, ULTRA_THICK`` から選択できます。デフォルトは ``SEMI_THICK`` です。
 
@@ -410,7 +410,7 @@ tpp.plot_spec(p).line.enable=true;
 tpp.plot_spec(p).line.width=cptp::Line::SEMI_THICK;
 ```
 
-#### dot（型：cptp::Dot）
+#### dot（型：``cptp::Dot``）
 
 プロットの線の破線などの設定値です。tikzの線の破線などの設定に準拠します。``cptp::Line::Dot``型の列挙体で、``SOLID, LOOSELY_DOTTED, DOTTED, DENSELY_DOTTED, LOOSELY_DASHED, DASHED, DENSELY_DASHED, 
             LOOSELY_DASH_DOT, DASH_DOT, DENSELY_DASH_DOT, LOOSELY_DASH_DOT_DOT, DASH_DOT_DOT, DENSELY_DASH_DOT_DOT`` から選択できます。デフォルトは ``SOLID`` です。
@@ -421,7 +421,7 @@ tpp.plot_spec(p).line.dot=cptp::Line::SOLID;
 
 （線の引き方の都合で、点線などはきれいに表記されない可能性が高いです。治そうと思ってます）
 
-#### option（型：std::string）
+#### option（型：``std::string``）
 
 プロットの線の追加設定で、文字列で取り扱います。デフォルトは空文字列です。tikzの線の``[]`` 内に ``option`` の内容がそのまま貼付されます。例えば、線の透明度を0.5にしたい場合は次のようにします。
 
@@ -429,11 +429,11 @@ tpp.plot_spec(p).line.dot=cptp::Line::SOLID;
 tpp.plot_spec(p).line.option="opacity=0.5";
 ```
 
-### point（型：cptp::Point）
+### point（型：``cptp::Point``）
 
 プロットの点の設定です。さらに細かい設定があります。
 
-#### enable（型：bool）
+#### enable（型：``bool``）
 
 プロットに点を利用するかどうかのフラグです。``true``で有効、``false`` で無効で、デフォルトは ``false`` です。
 
@@ -441,11 +441,11 @@ tpp.plot_spec(p).line.option="opacity=0.5";
 tpp.plot_spec(p).point.enable=false;
 ```
 
-#### color（型：cptp::Color）
+#### color（型：``cptp::Color``）
 
 ``plot_spec`` の``color`` と同様なので割愛。
 
-#### size（型：double）
+#### size（型：``double``）
 
 プロットの点の大きさ(pt)です。点には文字がそのまま利用されるため、単位はptです。デフォルトは 8.0 pt です。
 
@@ -453,7 +453,7 @@ tpp.plot_spec(p).point.enable=false;
 tpp.plot_spec(p).point.size=8.0;
 ```
 
-#### shape（型：std::string）
+#### shape（型：``std::string``）
 
 プロットの点の形です。Latexで使える文字をそのまま用いることができます。デフォルトは ``"$\\bullet$"`` で、塗りつぶされた丸い点です。例えば、バツ印にしたければ、``"$\\times$"`` などを用います。（あくまで文字なので、内部で多少位置を補正している場合があります。よく使いそうもないやつは試してないので少しずれるかも...）
 
@@ -461,7 +461,7 @@ tpp.plot_spec(p).point.size=8.0;
 tpp.plot_spec(p).point.shape="$\\bullet$";
 ```
 
-#### option（型：std::string）
+#### option（型：``std::string``）
 
 プロットの点の追加設定です。tikzの点に用いる文字付きノートの``[]`` 内に ``option`` の内容がそのまま貼付されます。デフォルトは空文字列です。
 
@@ -473,7 +473,7 @@ tpp.plot_spec(p).point.option="";
 
 プロットテーブルの各セルに設置する副題の設定の為の値です。``TabParPlots``型 は NxM のテーブルがあり、それぞれ各セルに P 個（以下）のプロットがある時に、各セルに対応する NxM の ``Title``型の値を持ちます。``title``関数でアクセスを行うか、``setDatas`` 関数の第４引数に``cptp::Title``型の値を直接代入することができます。
 
-### string（型：std::string）
+### string（型：``std::string``）
 
 テーブルの各セルにつく副題の文字列です。デフォルト（空文字列）の場合は (n,m) の様にセルIDが振られます。
 
@@ -481,7 +481,7 @@ tpp.plot_spec(p).point.option="";
 tpp.title(n, m).string="";
 ```
 
-### position（型：cptp::Position）
+### position（型：``cptp::Position``）
 
 テーブルの各セルにつく副題の位置です。デフォルト（空文字列）の場合は (n,m) の様にセルIDが振られます。
 
