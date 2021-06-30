@@ -1,7 +1,7 @@
 #ifndef CPTP_FORWARD_HPP
 #define CPTP_FORWARD_HPP
 
-#include <gd1.hpp>
+#include "../gd1.hpp"
 
 //+++++++++++++++++//
 //    Namespace    //
