@@ -1293,22 +1293,22 @@ namespace cptp{
             if(tit=="") tit=std::string("(")+std::to_string(a/_m)+","+std::to_string(a%_m)+")";
             float x=0.5*static_cast<float>(mathStrWidth(tit))*0.25*pointToCenti(_title_set[a].point);
             float y=0.5*pointToCenti(_title_set[a].point);
-            float x_margin=_title_set[a].margin.x;
-            float y_margin=_title_set[a].margin.y;
-            output_<<"\\coordinate (TITLE_MARGIN_X) at ("<<x_margin<<",0);"<<std::endl;
-            output_<<"\\coordinate (TITLE_MARGIN_Y) at (0,"<<y_margin<<");"<<std::endl;
+            //float x_margin=_title_set[a].margin.x;
+            //float y_margin=_title_set[a].margin.y;
+            output_<<"\\coordinate (TITLE_POS_DISP_X) at ("<<_title_set[a].position.disp.x<<",0);"<<std::endl;
+            output_<<"\\coordinate (TITLE_POS_DISP_Y) at (0,"<<_title_set[a].position.disp.y<<");"<<std::endl;
             switch(pos_base){
                 case Position::LEFT_BOTTOM  :
-                    output_<<"\\draw ($(BOX_LB_"<<a/_m<<"_"<<a%_m<<")+(TITLE_MARGIN_X)+(TITLE_MARGIN_Y)+("<<x<<","<<y<<")$) node{\\fontsize{"<<_title_set[a].point<<"pt}{0pt}\\selectfont "<<tit<<"};"<<std::endl;
+                    output_<<"\\draw ($(BOX_LB_"<<a/_m<<"_"<<a%_m<<")+(TITLE_POS_DISP_X)+(TITLE_POS_DISP_Y)+("<<x<<","<<y<<")$) node{\\fontsize{"<<_title_set[a].point<<"pt}{0pt}\\selectfont "<<tit<<"};"<<std::endl;
                     break;
                 case Position::RIGHT_BOTTOM :
-                    output_<<"\\draw ($(BOX_LB_"<<a/_m<<"_"<<a%_m<<")+(BOX_REGION_X)-(TITLE_MARGIN_X)+(TITLE_MARGIN_Y)+("<<-x<<","<<y<<")$) node{\\fontsize{"<<_title_set[a].point<<"pt}{0pt}\\selectfont "<<tit<<"};"<<std::endl;
+                    output_<<"\\draw ($(BOX_LB_"<<a/_m<<"_"<<a%_m<<")+(BOX_REGION_X)-(TITLE_POS_DISP_X)+(TITLE_POS_DISP_Y)+("<<-x<<","<<y<<")$) node{\\fontsize{"<<_title_set[a].point<<"pt}{0pt}\\selectfont "<<tit<<"};"<<std::endl;
                     break;
                 case Position::LEFT_TOP     :
-                    output_<<"\\draw ($(BOX_LB_"<<a/_m<<"_"<<a%_m<<")+(BOX_REGION_Y)+(TITLE_MARGIN_X)-(TITLE_MARGIN_Y)+("<<x<<","<<-y<<")$) node{\\fontsize{"<<_title_set[a].point<<"pt}{0pt}\\selectfont "<<tit<<"};"<<std::endl;
+                    output_<<"\\draw ($(BOX_LB_"<<a/_m<<"_"<<a%_m<<")+(BOX_REGION_Y)+(TITLE_POS_DISP_X)-(TITLE_POS_DISP_Y)+("<<x<<","<<-y<<")$) node{\\fontsize{"<<_title_set[a].point<<"pt}{0pt}\\selectfont "<<tit<<"};"<<std::endl;
                     break;
                 case Position::RIGHT_TOP    :
-                    output_<<"\\draw ($(BOX_RT_"<<a/_m<<"_"<<a%_m<<")-(TITLE_MARGIN_X)-(TITLE_MARGIN_Y)-("<<x<<","<<y<<")$) node{\\fontsize{"<<_title_set[a].point<<"pt}{0pt}\\selectfont "<<tit<<"};"<<std::endl;
+                    output_<<"\\draw ($(BOX_RT_"<<a/_m<<"_"<<a%_m<<")-(TITLE_POS_DISP_X)-(TITLE_POS_DISP_Y)-("<<x<<","<<y<<")$) node{\\fontsize{"<<_title_set[a].point<<"pt}{0pt}\\selectfont "<<tit<<"};"<<std::endl;
                     break;
             }
         }
