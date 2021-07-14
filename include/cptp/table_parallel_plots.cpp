@@ -341,8 +341,8 @@ namespace cptp{
                         std::string       str1;
                         ss1<<sv;
                         ss1>>str1;
-                        if(str1.length()>4){
-                           str1=str1.substr(0,4); 
+                        if(str1.length()>5){
+                           str1=str1.substr(0,5); 
                         }
                         scale_strs.pushBack(std::move(str1));
                     }
@@ -352,8 +352,8 @@ namespace cptp{
                         std::string       str1;
                         ss1<<sv*exp;
                         ss1>>str1;
-                        if(str1.length()>4){
-                           str1=str1.substr(0,4); 
+                        if(str1.length()>5){
+                           str1=str1.substr(0,5); 
                         }
                         scale_strs.pushBack(std::move(str1));
                     }
@@ -700,8 +700,8 @@ namespace cptp{
                         std::string       str1;
                         ss1<<sv;
                         ss1>>str1;
-                        if(str1.length()>4){
-                           str1=str1.substr(0,4); 
+                        if(str1.length()>5){
+                           str1=str1.substr(0,5); 
                         }
                         scale_strs.pushBack(std::move(str1));
                     }
@@ -711,8 +711,8 @@ namespace cptp{
                         std::string       str1;
                         ss1<<sv*exp;
                         ss1>>str1;
-                        if(str1.length()>4){
-                           str1=str1.substr(0,4); 
+                        if(str1.length()>5){
+                           str1=str1.substr(0,5); 
                         }
                         scale_strs.pushBack(std::move(str1));
                     }
@@ -930,7 +930,7 @@ namespace cptp{
                 for(uint_fast16_t p=0; p<_p && p<_data_set[n*_m+m].size(); ++p){
                     const PlotSpec& ps =_plot_spec_array[p];
                     const Data2D&   d2d=_data_set[n*_m+m][p];
-                    
+
                     for(size_t a=0; a<d2d.datas().size(); ++a){
                         Vec2 p1(d2d.datas()[a  ].path<0>(), d2d.datas()[a  ].path<1>());
                         switch(scale.x.arg.number()){
@@ -982,12 +982,13 @@ namespace cptp{
                         std::string width=ps.line._widthToString();
                         std::string dot  =ps.line._dotToString();
                         if(dot=="solid") dot="";
+                        bool initial_data=true;
                         for(size_t a=0; a<d2d.datas().size()-1; ++a){
                             Vec2 p1(d2d.datas()[a  ].path<0>(), d2d.datas()[a  ].path<1>());
                             Vec2 p2(d2d.datas()[a+1].path<0>(), d2d.datas()[a+1].path<1>());
-                            if(range.x.min<=p1.x && p1.x<=range.x.max && range.y.min<=p1.y && p1.y<=range.y.max &&
-                               range.x.min<=p2.x && p2.x<=range.x.max && range.y.min<=p2.y && p2.y<=range.y.max
-                            ){
+                            bool p1_in=(range.x.min<=p1.x && p1.x<=range.x.max && range.y.min<=p1.y && p1.y<=range.y.max);
+                            bool p2_in=(range.x.min<=p2.x && p2.x<=range.x.max && range.y.min<=p2.y && p2.y<=range.y.max);
+                            if(p1_in && p2_in){
                                 scalar x1,x2,y1,y2;
                                 switch(scale.x.arg.number()){
                                     case Scale::DECIMAL:
@@ -1010,9 +1011,19 @@ namespace cptp{
                                         y2=sca_.y*(std::log(p2.y)/std::log(scale.y.arg.path<Scale::LOG>().path<0>())-r2d_.y.min);
                                         break;
                                 }
+                                if(initial_data){
+                                    output_<<"\\draw["<<color<<","<<width<<","<<dot<<","<<ps.line.option<<"] ($(BOX_LB_"<<n<<"_"<<m<<")+("<<x1<<","<<y1<<")$)--($(BOX_LB_"<<n<<"_"<<m<<")+("<<x2<<","<<y2<<")$)";
+                                    initial_data=false;
+                                }else{
+                                    output_<<std::endl<<"--($(BOX_LB_"<<n<<"_"<<m<<")+("<<x2<<","<<y2<<")$)";
+                                }
 
-                                output_<<"\\draw["<<color<<","<<width<<","<<dot<<","<<ps.line.option<<"] ($(BOX_LB_"<<n<<"_"<<m<<")+("<<x1<<","<<y1<<")$)-"
-                                                                                                    << "-($(BOX_LB_"<<n<<"_"<<m<<")+("<<x2<<","<<y2<<")$);"<<std::endl;
+                            }else if(p1_in){
+                                if(!initial_data) output_<<";"<<std::endl;
+                                initial_data=true;
+                            }
+                            if(a==d2d.datas().size()-2){
+                                if(!initial_data) output_<<";"<<std::endl;
                             }
                         }
                     }
@@ -1293,22 +1304,22 @@ namespace cptp{
             if(tit=="") tit=std::string("(")+std::to_string(a/_m)+","+std::to_string(a%_m)+")";
             float x=0.5*static_cast<float>(mathStrWidth(tit))*0.25*pointToCenti(_title_set[a].point);
             float y=0.5*pointToCenti(_title_set[a].point);
-            float x_margin=_title_set[a].margin.x;
-            float y_margin=_title_set[a].margin.y;
-            output_<<"\\coordinate (TITLE_MARGIN_X) at ("<<x_margin<<",0);"<<std::endl;
-            output_<<"\\coordinate (TITLE_MARGIN_Y) at (0,"<<y_margin<<");"<<std::endl;
+            //float x_margin=_title_set[a].margin.x;
+            //float y_margin=_title_set[a].margin.y;
+            output_<<"\\coordinate (TITLE_POS_DISP_X) at ("<<_title_set[a].position.disp.x<<",0);"<<std::endl;
+            output_<<"\\coordinate (TITLE_POS_DISP_Y) at (0,"<<_title_set[a].position.disp.y<<");"<<std::endl;
             switch(pos_base){
                 case Position::LEFT_BOTTOM  :
-                    output_<<"\\draw ($(BOX_LB_"<<a/_m<<"_"<<a%_m<<")+(TITLE_MARGIN_X)+(TITLE_MARGIN_Y)+("<<x<<","<<y<<")$) node{\\fontsize{"<<_title_set[a].point<<"pt}{0pt}\\selectfont "<<tit<<"};"<<std::endl;
+                    output_<<"\\draw ($(BOX_LB_"<<a/_m<<"_"<<a%_m<<")+(TITLE_POS_DISP_X)+(TITLE_POS_DISP_Y)+("<<x<<","<<y<<")$) node{\\fontsize{"<<_title_set[a].point<<"pt}{0pt}\\selectfont "<<tit<<"};"<<std::endl;
                     break;
                 case Position::RIGHT_BOTTOM :
-                    output_<<"\\draw ($(BOX_LB_"<<a/_m<<"_"<<a%_m<<")+(BOX_REGION_X)-(TITLE_MARGIN_X)+(TITLE_MARGIN_Y)+("<<-x<<","<<y<<")$) node{\\fontsize{"<<_title_set[a].point<<"pt}{0pt}\\selectfont "<<tit<<"};"<<std::endl;
+                    output_<<"\\draw ($(BOX_LB_"<<a/_m<<"_"<<a%_m<<")+(BOX_REGION_X)-(TITLE_POS_DISP_X)+(TITLE_POS_DISP_Y)+("<<-x<<","<<y<<")$) node{\\fontsize{"<<_title_set[a].point<<"pt}{0pt}\\selectfont "<<tit<<"};"<<std::endl;
                     break;
                 case Position::LEFT_TOP     :
-                    output_<<"\\draw ($(BOX_LB_"<<a/_m<<"_"<<a%_m<<")+(BOX_REGION_Y)+(TITLE_MARGIN_X)-(TITLE_MARGIN_Y)+("<<x<<","<<-y<<")$) node{\\fontsize{"<<_title_set[a].point<<"pt}{0pt}\\selectfont "<<tit<<"};"<<std::endl;
+                    output_<<"\\draw ($(BOX_LB_"<<a/_m<<"_"<<a%_m<<")+(BOX_REGION_Y)+(TITLE_POS_DISP_X)-(TITLE_POS_DISP_Y)+("<<x<<","<<-y<<")$) node{\\fontsize{"<<_title_set[a].point<<"pt}{0pt}\\selectfont "<<tit<<"};"<<std::endl;
                     break;
                 case Position::RIGHT_TOP    :
-                    output_<<"\\draw ($(BOX_RT_"<<a/_m<<"_"<<a%_m<<")-(TITLE_MARGIN_X)-(TITLE_MARGIN_Y)-("<<x<<","<<y<<")$) node{\\fontsize{"<<_title_set[a].point<<"pt}{0pt}\\selectfont "<<tit<<"};"<<std::endl;
+                    output_<<"\\draw ($(BOX_RT_"<<a/_m<<"_"<<a%_m<<")-(TITLE_POS_DISP_X)-(TITLE_POS_DISP_Y)-("<<x<<","<<y<<")$) node{\\fontsize{"<<_title_set[a].point<<"pt}{0pt}\\selectfont "<<tit<<"};"<<std::endl;
                     break;
             }
         }
