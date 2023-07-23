@@ -17,4 +17,4 @@ make install
 ```
 See example code in `src` dirctory.
 
-For compile, use `-lcptp` option for linking library.
+For compile, use `-lcptp` or `-lcptp_a` option for linking shared or static library. 
