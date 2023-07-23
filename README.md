@@ -15,3 +15,5 @@ make install
 ```cpp
 #include <cptp/cptp.hpp>
 ```
+
+See example code in `src` dirctory. 
