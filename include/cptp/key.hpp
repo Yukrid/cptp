@@ -22,6 +22,7 @@ namespace cptp{
         float    point;
         float    margin;
         float    interval;
+        float    str_scale;
 
 
         //+     Member Function    +//
@@ -29,8 +30,8 @@ namespace cptp{
              Key         (void)                                                                  noexcept;
              Key         (const Key&)                                                            =default;
              Key         (Key&&)                                                                 =default;
-             Key         (bool, const Position& =Position(), float =5.0, float =0.15, float =0.05) noexcept;
-        Key& construct   (bool, const Position& =Position(), float =5.0, float =0.15, float =0.05) noexcept;
+             Key         (bool, const Position& =Position(), float =5.0, float =0.15, float =0.05, float =0.5) noexcept;
+        Key& construct   (bool, const Position& =Position(), float =5.0, float =0.15, float =0.05, float =0.5) noexcept;
         
 
         //_ Destructor
