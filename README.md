@@ -10,10 +10,11 @@ make
 make install
 ```
 
-## To include
+## To include and compile
 
 ```cpp
 #include <cptp/cptp.hpp>
 ```
+See example code in `src` dirctory.
 
-See example code in `src` dirctory. 
+For compile, use `-lcptp` option for linking library.
