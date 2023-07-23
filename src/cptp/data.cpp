@@ -90,8 +90,6 @@ namespace cptp{
         std::ifstream ifs(s_);
         new(this) Data2D(ifs, x_, y_);
         ifs.close();
-        
-        return *this;
     }
 
 
@@ -100,8 +98,6 @@ namespace cptp{
         std::ifstream ifs(s_);
         new(this) Data2D(ifs, i_, y_);
         ifs.close();
-        
-        return *this;
     }
 
 
@@ -110,8 +106,6 @@ namespace cptp{
         std::ifstream ifs(s_);
         new(this) Data2D(ifs, x_, i_);
         ifs.close();
-        
-        return *this;
     }
    
 
