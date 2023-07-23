@@ -90,6 +90,9 @@ namespace cptp{
                        Data2D      (std::ifstream&, uint16_t =0, uint16_t =1)                        noexcept;
                        Data2D      (std::ifstream&, Index, uint16_t)                                 noexcept;
                        Data2D      (std::ifstream&, uint16_t, Index)                                 noexcept;
+                       Data2D      (const std::string&, uint16_t =0, uint16_t =1)                    noexcept;
+                       Data2D      (const std::string&, Index, uint16_t)                             noexcept;
+                       Data2D      (const std::string&, uint16_t, Index)                             noexcept;
         template <typename T, typename U>
         inline         Data2D      (const Data<T>&, const Data<U>&, const Skipper& =Skipper(), const Separators& =Separators()) noexcept;
         template <typename U>
