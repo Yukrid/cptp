@@ -85,6 +85,34 @@ namespace cptp{
     }
 
 
+    Data2D::Data2D(const std::string& s_, uint16_t x_, uint16_t y_) noexcept
+    {
+        std::ifstream ifs(s_);
+        new(this) Data2D(ifs, x_, y_);
+        ifs.close();
+        
+        return *this;
+    }
+
+
+    Data2D::Data2D(const std::string& s_, Index i_, uint16_t y_) noexcept
+    {
+        std::ifstream ifs(s_);
+        new(this) Data2D(ifs, i_, y_);
+        ifs.close();
+        
+        return *this;
+    }
+
+
+    Data2D::Data2D(const std::string& s_, uint16_t x_, Index i_) noexcept
+    {
+        std::ifstream ifs(s_);
+        new(this) Data2D(ifs, x_, i_);
+        ifs.close();
+        
+        return *this;
+    }
    
 
      
