@@ -10,7 +10,7 @@ target_include_directories(cptp_a PUBLIC ./include)
 target_compile_features(cptp_a PUBLIC cxx_std_11)
 
 install(TARGETS cptp cptp_a LIBRARY DESTINATION lib)
-
+install(DIRECTORY include/ DESTINATION include)
 
 add_executable(example1 ./src/example1/example1.cpp)
 target_include_directories(example1 PUBLIC ./include)
