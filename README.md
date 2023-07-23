@@ -11,9 +11,9 @@ make install
 ```
 
 ## To include and compile
-Just include `cptp/cptp.hpp` like,
+Just include `cptp.hpp` like,
 ```cpp
-#include <cptp/cptp.hpp>
+#include <cptp.hpp>
 ```
 .
 
