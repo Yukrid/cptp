@@ -1166,7 +1166,7 @@ namespace cptp{
         for(size_t a=0; a<_plot_spec_array.size(); ++a){
             PlotSpec& ps=_plot_spec_array[a];
             if(ps.tag=="") ps.tag=std::to_string(a);
-            float width=0.75*keyWidth(ps.tag)*pointToCenti(key.point);
+            float width=key.str_scale*keyWidth(ps.tag)*pointToCenti(key.point);
             if(width>key_str_width) key_str_width=width; 
         }
         float key_space_width=pointToCenti(key.point)*3+key_str_width+key.margin*2;
