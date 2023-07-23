@@ -14,8 +14,8 @@ namespace cptp{
     Key::Key(void) noexcept
         : enable   (true)
         , position ( )
-        , point    (5.0)
-        , margin   (0.15)
+        , point    (8.0)
+        , margin   (0.10)
         , interval (0.05)
     {
         return;
