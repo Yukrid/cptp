@@ -9,17 +9,26 @@ namespace cptp{
     Data2D::Data2D(std::ifstream& ifs_, uint16_t x_, uint16_t y_) noexcept
     {
         std::string str;
+        size_t count = 0;
         while(std::getline(ifs_, str)){
-            scalar x, y, value;
+            scalar x, y;
             std::stringstream ss1;
             ss1<<str;
             uint_fast16_t line=(x_<y_ ? y_ : x_)+1;
             for(uint_fast16_t a=0; a<line; ++a){
-                ss1>>value;
-                if(a==x_) x=value;
-                if(a==y_) y=value;
+                std::string str2;
+                ss1>>str2;
+                if(a==x_){
+                    if(str2=="s") skip(count);
+                    else          x=stod(str2);
+                }
+                if(a==y_){
+                    if(str2=="s") skip(count);
+                    else          y=stod(str2);
+                }
             }
             _datas.pushBack(gd::Tuple<scalar, scalar>(x, y));
+            ++count;
         }
     }
 
@@ -33,8 +42,13 @@ namespace cptp{
             std::stringstream ss1;
             ss1<<str;
             for(uint_fast16_t a=0; a<y_+1; ++a){
-                ss1>>value;
-                if(a==y_) y=value;
+                std::string str2;
+                ss1>>str2;
+                if(a==y_){
+                    std::cout<<a<<' '<<str2<<std::endl;
+                    if(str2=="s") skip(count);
+                    else          y=stod(str2);
+                }
             }
             _datas.pushBack(gd::Tuple<scalar, scalar>(count++, y));
         }
@@ -50,8 +64,12 @@ namespace cptp{
             std::stringstream ss1;
             ss1<<str;
             for(uint_fast16_t a=0; a<x_+1; ++a){
-                ss1>>value;
-                if(a==x_) x=value;
+                std::string str2;
+                ss1>>str2;
+                if(a==x_){
+                    if(str2=="s") skip(count);
+                    else          x=stod(str2);
+                }
             }
             _datas.pushBack(gd::Tuple<scalar, scalar>(x, count++));
         }
