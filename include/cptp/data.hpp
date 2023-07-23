@@ -4,6 +4,7 @@
 #include "forward.hpp"
 #include <fstream>
 #include <sstream>
+#include <set>
 
 //+++++++++++++++++//
 //    Namespace    //
@@ -63,7 +64,8 @@ namespace cptp{
 
         //+   Alias   +//
         using Series2D  =gd::Table<scalar, scalar>;
-        using Separators=gd::List<size_t>;
+        using Separators=std::set<size_t>;
+        using Skipper   =std::set<size_t>;
 
         //+    Member Type    +//
         //(    cptp::Data2D::Index Enumeration    )//
@@ -77,6 +79,7 @@ namespace cptp{
         //->    Data2D Family    <-//
         Series2D   _datas;
         Separators _separators;
+        Skipper    _skipper;
 
         //+     Member Function    +//
         public:
@@ -88,24 +91,24 @@ namespace cptp{
                        Data2D      (std::ifstream&, Index, uint16_t)                                 noexcept;
                        Data2D      (std::ifstream&, uint16_t, Index)                                 noexcept;
         template <typename T, typename U>
-        inline         Data2D      (const Data<T>&, const Data<U>&, const Separators& =Separators()) noexcept;
+        inline         Data2D      (const Data<T>&, const Data<U>&, const Skipper& =Skipper(), const Separators& =Separators()) noexcept;
         template <typename U>
-        inline         Data2D      (Index, const Data<U>&, const Separators& =Separators())          noexcept;
+        inline         Data2D      (Index, const Data<U>&, const Skipper& =Skipper(), const Separators& =Separators())          noexcept;
         template <typename T>
-        inline         Data2D      (const Data<T>&, Index, const Separators& =Separators())          noexcept;
+        inline         Data2D      (const Data<T>&, Index, const Skipper& =Skipper(), const Separators& =Separators())          noexcept;
                Data2D& construct   (void)                                                            noexcept;
         template <typename T, typename U>
-        inline Data2D& construct   (const Data<T>&, const Data<U>&, const Separators& =Separators()) noexcept;
+        inline Data2D& construct   (const Data<T>&, const Data<U>&, const Skipper& =Skipper(), const Separators& =Separators()) noexcept;
         template <typename U>
-        inline Data2D& construct   (Index, const Data<U>&, const Separators& =Separators())          noexcept;
+        inline Data2D& construct   (Index, const Data<U>&, const Skipper& =Skipper(), const Separators& =Separators())          noexcept;
         template <typename T>
-        inline Data2D& construct   (const Data<T>&, Index, const Separators& =Separators())          noexcept;
+        inline Data2D& construct   (const Data<T>&, Index, const Skipper& =Skipper(), const Separators& =Separators())          noexcept;
         template <typename T, typename U>
-        inline Data2D& reconstruct (const Data<T>&, const Data<U>&, const Separators& =Separators()) noexcept;
+        inline Data2D& reconstruct (const Data<T>&, const Data<U>&, const Skipper& =Skipper(), const Separators& =Separators()) noexcept;
         template <typename U>
-        inline Data2D& reconstruct (Index, const Data<U>&, const Separators& =Separators())          noexcept;
+        inline Data2D& reconstruct (Index, const Data<U>&, const Skipper& =Skipper(), const Separators& =Separators())          noexcept;
         template <typename T>
-        inline Data2D& reconstruct (const Data<T>&, Index, const Separators& =Separators())          noexcept;
+        inline Data2D& reconstruct (const Data<T>&, Index, const Skipper& =Skipper(), const Separators& =Separators())          noexcept;
         
 
         //_ Destructor
@@ -122,10 +125,16 @@ namespace cptp{
         const Series2D&   datas     (void) const noexcept;
         const size_t&     length    (void) const noexcept;
         const Separators& separator (void) const noexcept;
+        const Skipper&    skipper   (void) const noexcept;
 
         //_ Constant Function
         size_t _memory (void) const noexcept;
         
+        //_ Variable Function
+        void separate (size_t) noexcept;
+        void skip     (size_t) noexcept;
+        
+
         //_ Ternary Operator
         Data2D& operator= (const Data2D&) =default;
         Data2D& operator= (Data2D&&)      =default;

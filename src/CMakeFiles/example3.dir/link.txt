@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/example3.dir/example3/example3.cpp.o -o example3  -Wl,-rpath,/home/yuui/Git/cptp/src libcptp.so 

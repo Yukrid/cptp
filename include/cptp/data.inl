@@ -126,8 +126,9 @@ namespace cptp{
     //+     Member Function    +//
     //_ Constuctor
     template <typename T, typename U>
-    Data2D::Data2D(const Data<T>& x_, const Data<U>& y_, const Separators& sep_) noexcept
+    Data2D::Data2D(const Data<T>& x_, const Data<U>& y_, const Skipper& skip_, const Separators& sep_) noexcept
         : _datas        ( )
+        , _skipper    (skip_)
         , _separators (sep_)
     {
         _datas.resize(x_.length()<y_.length() ? x_.length() : y_.length());
@@ -147,8 +148,9 @@ namespace cptp{
 
      
     template <typename U>
-    Data2D::Data2D(Index, const Data<U>& y_, const Separators& sep_) noexcept
+    Data2D::Data2D(Index, const Data<U>& y_, const Skipper& skip_, const Separators& sep_) noexcept
         : _datas        ( )
+        , _skipper    (skip_)
         , _separators (sep_)
     {
         _datas.resize(y_.length());
@@ -168,8 +170,9 @@ namespace cptp{
     
     
     template <typename T>
-    Data2D::Data2D(const Data<T>& x_, Index, const Separators& sep_) noexcept
+    Data2D::Data2D(const Data<T>& x_, Index, const Skipper& skip_, const Separators& sep_) noexcept
         : _datas     ( )
+        , _skipper   ( )
         , _separators (sep_)
     {
         _datas.resize(x_.length());
@@ -189,57 +192,57 @@ namespace cptp{
      
     
     template <typename T, typename U>
-    Data2D& Data2D::construct(const Data<T>& x_, const Data<U>& y_, const Separators& sep_) noexcept
+    Data2D& Data2D::construct(const Data<T>& x_, const Data<U>& y_, const Skipper& skip_, const Separators& sep_) noexcept
     {
-        new(this) Data2D(x_, y_, sep_);
+        new(this) Data2D(x_, y_, skip_, sep_);
 
         return *this;
     }
 
 
     template <typename U>
-    Data2D& Data2D::construct(Index i_, const Data<U>& y_, const Separators& sep_) noexcept
+    Data2D& Data2D::construct(Index i_, const Data<U>& y_, const Skipper& skip_, const Separators& sep_) noexcept
     {
-        new(this) Data2D(i_, y_, sep_);
+        new(this) Data2D(i_, y_, skip_, sep_);
 
         return *this;
     }
 
 
     template <typename T>
-    Data2D& Data2D::construct(const Data<T>& x_, Index i_, const Separators& sep_) noexcept
+    Data2D& Data2D::construct(const Data<T>& x_, Index i_, const Skipper& skip_, const Separators& sep_) noexcept
     {
-        new(this) Data2D(x_, i_, sep_);
+        new(this) Data2D(x_, i_, skip_, sep_);
 
         return *this;
     }
  
 
     template <typename T, typename U>
-    Data2D& Data2D::reconstruct(const Data<T>& x_, const Data<U>& y_, const Separators& sep_) noexcept
+    Data2D& Data2D::reconstruct(const Data<T>& x_, const Data<U>& y_, const Skipper& skip_, const Separators& sep_) noexcept
     {
         this->~Data2D();
-        new(this) Data2D(x_, y_, sep_);
+        new(this) Data2D(x_, y_, skip_, sep_);
 
         return *this;
     }
     
 
     template <typename U>
-    Data2D& Data2D::reconstruct(Index i_, const Data<U>& y_, const Separators& sep_) noexcept
+    Data2D& Data2D::reconstruct(Index i_, const Data<U>& y_, const Skipper& skip_, const Separators& sep_) noexcept
     {
         this->~Data2D();
-        new(this) Data2D(i_, y_, sep_);
+        new(this) Data2D(i_, y_, skip_, sep_);
 
         return *this;
     }
 
 
     template <typename T>
-    Data2D& Data2D::reconstruct(const Data<T>& x_, Index i_, const Separators& sep_) noexcept
+    Data2D& Data2D::reconstruct(const Data<T>& x_, Index i_, const Skipper& skip_, const Separators& sep_) noexcept
     {
         this->~Data2D();
-        new(this) Data2D(x_, i_, sep_);
+        new(this) Data2D(x_, i_, skip_, sep_);
 
         return *this;
     }
