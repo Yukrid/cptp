@@ -228,17 +228,25 @@ namespace cptp{
         scalar f_max=+std::numeric_limits<scalar>::max();
         scalar f_min=-std::numeric_limits<scalar>::max();
         
-        if(range.x.min==f_max || range.x.max==f_min){
+        scalar xmin = range.x.min;
+        scalar xmax = range.x.max;
+        scalar ymin = range.y.min;
+        scalar ymax = range.y.max;
+
+        if((range.x.min==f_max || range.x.max==f_min) or (ymin!=f_max || ymax!=f_min)){
 
             scalar tx_min=f_max;
             scalar tx_max=f_min;
+            if(ymin==f_max) ymin=f_min;
+            if(ymax==f_min) ymax=f_max;
             for(auto& data_array : _data_set.range()){
                 for(auto& d2 : data_array.range()){
                     for(size_t a=0; a<d2.datas().path<0>().size(); ++a){
                         if(d2.skipper().find(a)==d2.skipper().end()){
                             auto& x = d2.datas().path<0>()[a];
-                            if(tx_min>x) tx_min=x;
-                            if(tx_max<x) tx_max=x;
+                            auto& y = d2.datas().path<1>()[a];
+                            if(tx_min>x and ymin <= y and y <= ymax) tx_min=x;
+                            if(tx_max<x and ymin <= y and y <= ymax) tx_max=x;
                         }
                     }
                 }
@@ -247,17 +255,20 @@ namespace cptp{
             if(range.x.max==f_min) range.x.max=tx_max;
         }
 
-        if(range.y.min==f_max || range.y.max==f_min){
+        if((range.y.min==f_max || range.y.max==f_min) or (xmin!=f_max || xmax!=f_min)){
 
             scalar ty_min=f_max;
             scalar ty_max=f_min;
+            if(xmin==f_max) xmin=f_min;
+            if(xmax==f_min) xmax=f_max;
             for(auto& data_array : _data_set.range()){
                 for(auto& d2 : data_array.range()){
                     for(size_t a=0; a<d2.datas().path<1>().size(); ++a){
                         if(d2.skipper().find(a)==d2.skipper().end()){
+                            auto& x = d2.datas().path<0>()[a];
                             auto& y = d2.datas().path<1>()[a];
-                            if(ty_min>y) ty_min=y;
-                            if(ty_max<y) ty_max=y;
+                            if(ty_min>y and xmin <= x and x <= xmax) ty_min=y;
+                            if(ty_max<y and xmin <= x and x <= xmax) ty_max=y;
                         }
                     }
                 }
