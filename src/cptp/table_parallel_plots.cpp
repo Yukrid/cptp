@@ -167,9 +167,9 @@ namespace cptp{
         _drawBox(figure, ofs, scaler);
         r2d=range;
         _drawScale(ofs, scaler, r2d);
-        _drawLabel(ofs);
+        if(label.enable) _drawLabel(ofs);
         _drawPlot(scaler, r2d, ofs, cofs);
-        _drawKey(cofs, ofs, key_nmpos);
+        if(key.enable) _drawKey(cofs, ofs, key_nmpos);
         _drawTitle(cofs, key_nmpos, ofs);
         _writeFinalCode(ofs);
 
