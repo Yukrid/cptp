@@ -163,7 +163,10 @@ namespace cptp{
         cofs.memset(0);
         
         _writeInitialCode(ofs, figure, cammpus);
-        _decideRange();
+        if(_decideRange()){
+            std::cerr<<"Range error"<<std::endl;
+            return;
+        }
         _drawBox(figure, ofs, scaler);
         r2d=range;
         _drawScale(ofs, scaler, r2d);
@@ -223,7 +226,7 @@ namespace cptp{
     }
 
 
-    void TabParPlots::_decideRange(void) noexcept
+    int TabParPlots::_decideRange(void) noexcept
     {
         scalar f_max=+std::numeric_limits<scalar>::max();
         scalar f_min=-std::numeric_limits<scalar>::max();
@@ -277,7 +280,8 @@ namespace cptp{
             if(range.y.max==f_min) range.y.max=ty_max;
         }
         
-        return;
+        if(range.x.min < range.x.max and range.x.min < range.x.max) return 0;
+        else                                                        return -1;
     }
 
 

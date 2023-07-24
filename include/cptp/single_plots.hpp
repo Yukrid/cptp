@@ -73,7 +73,7 @@ namespace cptp{
         void setDatas          (const Data2DArray&, const Title& =Title())                                      noexcept;
         void outputPlot        (const std::string&)                                                             noexcept;
         void _writeInitialCode (std::ofstream&, Vec2&, Vec2&)                                                   noexcept;
-        void _decideRange      (void)                                                                           noexcept;
+        int  _decideRange      (void)                                                                           noexcept;
         void _drawBox          (const Vec2&, std::ofstream&, Vec2&)                                             noexcept;
         void _drawScale        (std::ofstream&, Vec2&, Range2D&)                                                noexcept;
         void _drawLabel        (std::ofstream&)                                                                 noexcept;
