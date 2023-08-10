@@ -12,7 +12,7 @@ namespace cptp{
     //+     Member Function    +//
     //_ Constructor
     Title::Title(void) noexcept
-        : string   ( )
+        : string   ("\t")
         , position (Position::AUTO)
         , margin   (0.12, 0.12)
         , point    (9.0)

@@ -1330,7 +1330,7 @@ namespace cptp{
             }
 
             std::string tit=_title_set[a].string;
-            if(tit=="") tit=std::string("(")+std::to_string(a/_m)+","+std::to_string(a%_m)+")";
+            if(tit=="\t") tit=std::string("(")+std::to_string(a/_m)+","+std::to_string(a%_m)+")";
             float x=0.5*static_cast<float>(mathStrWidth(tit))*0.25*pointToCenti(_title_set[a].point);
             float y=0.5*pointToCenti(_title_set[a].point);
             //float x_margin=_title_set[a].margin.x;
