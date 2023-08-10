@@ -36,7 +36,7 @@ namespace cptp{
         //->    Isolated Variable    <-//
         double   point;
         double   length;
-        uint16_t interval;
+        double interval;
         bool     grid;
         Arg      arg;
 

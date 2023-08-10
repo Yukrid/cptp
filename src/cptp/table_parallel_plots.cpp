@@ -343,7 +343,11 @@ namespace cptp{
                 if(arg<range.x.min || range.x.max<arg){
                     arg=(static_cast<scalar>(min_i)+1)/exp;
                 }
-                uint32_t interval=scale.x.interval==0 ? scaleInterval(max_i-min_i) : scale.x.interval;
+                uint32_t interval=scale.x.interval==0 ? scaleInterval(max_i-min_i) : scale.x.interval*exp;
+                if(interval == 0){
+                    std::cerr<<"error: invalid scale interval"<<std::endl;
+                    std::exit(EXIT_FAILURE);
+                }
                 gd::List<scalar> rev_sv;
                 for(scalar a=arg-interval/exp; a>=range.x.min; a-=interval/exp){
                     rev_sv.pushBack(static_cast<scalar>(a));
