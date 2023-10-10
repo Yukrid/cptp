@@ -280,7 +280,16 @@ namespace cptp{
             if(range.y.max==f_min) range.y.max=ty_max;
         }
         
-        if(range.x.min < range.x.max and range.x.min < range.x.max) return 0;
+        if(range.x.min == range.x.max){
+            range.x.min -=1.;
+            range.x.max +=1.;
+        }
+        if(range.y.min == range.y.max){
+            range.y.min -=1.;
+            range.y.max +=1.;
+        }
+
+        if(range.x.min < range.x.max and range.y.min < range.y.max) return 0;
         else                                                        return -1;
     }
 
