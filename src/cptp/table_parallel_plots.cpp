@@ -193,7 +193,7 @@ namespace cptp{
         } 
         fig=camp-0.1;
  
-        output_<<"\\documentclass[dvipdfmx, 10pt]{beamer}"<<std::endl;
+        output_<<"\\documentclass[10pt]{beamer}"<<std::endl;
         output_<<"\\usefonttheme{serif}"<<std::endl;
         output_<<"\\setbeamertemplate{navigation symbols}{}"<<std::endl;
         output_<<std::endl;
