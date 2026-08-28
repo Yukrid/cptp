@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.14)
 project(CPTP CXX)
 
 add_library(cptp SHARED ./src/cptp/forward.cpp ./src/cptp/vec2.cpp ./src/cptp/rgb.cpp ./src/cptp/color.cpp ./src/cptp/figure.cpp ./src/cptp/label.cpp ./src/cptp/scale.cpp ./src/cptp/title.cpp ./src/cptp/line.cpp ./src/cptp/data.cpp ./src/cptp/point.cpp ./src/cptp/range.cpp ./src/cptp/key.cpp ./src/cptp/plot_spec.cpp ./src/cptp/position.cpp ./src/cptp/table_parallel_plots.cpp ./src/cptp/single_plots.cpp)
